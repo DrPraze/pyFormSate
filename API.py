@@ -33,7 +33,7 @@ class AutoFill(Resource):
 		# browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())	#for Firefox user
 		# browser = webdriver.Safari()	#uncomment this for macOS users[for others use chrome via chromedriver]
 		browser = webdriver.Chrome()	#for chrome users
-		browser.get((link))
+		browser.get((url))
 		list_of_input_names = eval(elements)
 		submit_btns = eval(submit)
 		try:
