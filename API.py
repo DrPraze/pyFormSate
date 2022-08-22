@@ -3,8 +3,8 @@ from flask_restful import Api, Resource
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdrivevr.support import expected_conditions as EC
-from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.support import expected_conditions as EC
+# from webdriver_manager.firefox import GeckoDriverManager
 import time, os, urllib
 from bs4 import BeautifulSoup
 
@@ -63,9 +63,9 @@ class AutoFill(Resource):
 			return {"Success": False, "Url":link}		
 
 
-api.add_resource(GetFields, "getfields/<path:url>")
+api.add_resource(GetFields, "/getfields/<path:url>")
 
-api.add_resource(AutoFill, "autofill/<string:elements>/<string:values>/<string:submit>/<path:url>")
+api.add_resource(AutoFill, "/autofill/<string:elements>/<string:values>/<string:submit>/<path:url>")
 
 if __name__== '__main__':
 	app.run(debug=True)
