@@ -29,18 +29,18 @@ class GetFields(Resource):
 
 
 class AutoFill(Resource):
-	def get(self, values, submit, url):
+	def get(self, elements, values, submit, url):
 		# browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())	#for Firefox user
 		# browser = webdriver.Safari()	#uncomment this for macOS users[for others use chrome via chromedriver]
 		browser = webdriver.Chrome()	#for chrome users
 		browser.get((link))
-		list_of_input_names = eval(values)
+		list_of_input_names = eval(elements)
 		submit_btns = eval(submit)
 		try:
 			for i in list_of_input_names:
-				i+"_element" = input("Enter your value for: "+i)
-				n = browser.find_element_by_name(i)
-				n.send_keys(i+"_element")
+				for j in values:
+					n = browser.find_element_by_name(i)
+					n.send_keys(j)
 			# The next line below gets only the first submit button in a case where
 			# there are several submit buttons in the site
 			submit_btn = browser.find_element_by_name(submit_btns[0])
@@ -65,7 +65,7 @@ class AutoFill(Resource):
 
 api.add_resource(GetFields, "getfields/<path:url>")
 
-api.add_resource(AutoFill, "autofill/<string:values>/<string:submit>/<path:url>")
+api.add_resource(AutoFill, "autofill/<string:elements>/<string:values>/<string:submit>/<path:url>")
 
 if __name__== '__main__':
 	app.run(debug=True)
