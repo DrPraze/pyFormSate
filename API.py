@@ -16,7 +16,7 @@ class GetFields(Resource):
 		try:
 			readsite = urllib.request.urlopen(url).read()
 			soup = BeautifulSoup(readsite)
-			list_of_input_names = [_link_.get('name') for link in soup.find_all('input')]
+			list_of_input_names = [link.get('name') for link in soup.find_all('input')]
 			submit_btns = [link.get('name') for link in soup.find_all('submit')]
 
 			return {"Success": True,
