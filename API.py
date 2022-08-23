@@ -17,7 +17,7 @@ class GetFields(Resource):
 			readsite = urllib.request.urlopen(url).read()
 			soup = BeautifulSoup(readsite)
 			list_of_input_names = [link.get('name') for link in soup.find_all('input')]
-			submit_btns = [link.get('name') for link in soup.find_all('submit')]
+			submit_btns = [link.get('name') for link in soup.find_all('button')]
 
 			return {"Success": True,
 				"Url":url,
@@ -41,8 +41,8 @@ class AutoFill(Resource):
 				for j in values:
 					n = browser.find_element_by_name(i)
 					n.send_keys(j)
-			# The next line below gets only the first submit button in a case where
-			# there are several submit buttons in the site
+			# The next line below gets only the first button in a case where
+			# there are several buttons in the site
 			submit_btn = browser.find_element_by_name(submit_btns[0])
 			submit_btn.click()
 			#=== To quit the browser uncomment the following lines ===
@@ -60,7 +60,7 @@ class AutoFill(Resource):
 			# browser.quit()
 			# browserEXE = "Safari"
 			# os.system("pkill "+browserExe)
-			return {"Success": False, "Url":link}		
+			return {"Success": False, "Url":link, "Error":e}		
 
 
 api.add_resource(GetFields, "/getfields/<path:url>")
